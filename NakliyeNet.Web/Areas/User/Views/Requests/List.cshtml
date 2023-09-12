@@ -1,0 +1,165 @@
+﻿@using TransportationApp.Domain.Models.Request;
+@using TransportationApp.Domain.Models.Common;
+@using TransportationApp.Domain.Common
+@model PaginationResult<RequestListModel>
+@{
+    ViewData["Title"] = "Taleplerim";
+}
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    Taleplerim
+                </h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+                <a href="/user/requests/create" class="btn btn-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                    Yeni Talep
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="card-body p-0">
+                <div id="table-default" class="table-responsive">
+                    <table class="table table-hover" style="vertical-align:middle">
+                        <thead>
+                            <tr>
+                                <th><button class="table-sort" data-sort="sort-name">Id</button></th>
+                                <th><button class="table-sort desc" data-sort="sort-type">Kategori</button></th>
+                                <th><button class="table-sort desc" data-sort="sort-type">Teklif Sayısı</button></th>
+                                <th><button class="table-sort" data-sort="sort-score">Oluşturulma Tarihi</button></th>
+                                <th><button class="table-sort desc" data-sort="sort-type">Durum</button></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-tbody">
+                            @foreach (var t in Model.Data)
+                            {
+                                <tr>
+                                    <td class="sort-name">#@t.Id</td>
+                                    <td class="sort-type"><a href="/user/requests/detail/@t.Id">@t.Category</a></td>
+                                    <td class="sort-type">
+                                        <div class="avatar-list avatar-list-stacked">
+                                            <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                            <span class="avatar avatar-xs rounded">JL</span>
+                                            <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/002m.jpg)"></span>
+                                            <span class="avatar avatar-xs rounded">+@t.ApplicationCount</span>
+                                        </div>
+                                    </td>
+                                    <td class="sort-score">@t.CreateDate.ToShortDateString()</td>
+                                    <td class="sort-score">
+                                        @if (t.Status == RequestStatus.Active)
+                                        {
+                                            <span class="badge bg-info">Açık</span>
+                                        }
+                                        @if (t.Status == RequestStatus.InProgress)
+                                        {
+                                            <span class="badge bg-warning">Devam Ediyor</span>
+                                        }
+                                        @if (t.Status == RequestStatus.Completed)
+                                        {
+                                            <span class="badge bg-green">Tamamlandı</span>
+                                        }
+                                        @if (t.Status == RequestStatus.Cancelled)
+                                        {
+                                            <span class="badge bg-secondary">İptal Edildi</span>
+                                        }
+                                    </td>
+                                    <td class="sort-progress">
+                                        <a href="/user/requests/detail/@t.Id" class="btn btn-primary">Detaylar</a>
+                                        @if (t.Status == RequestStatus.InProgress)
+                                        {
+                                            <button type="button" class="btn btn-success btnComplete" data-id="@t.Id" data-bs-toggle="modal" data-bs-target="#modal-request-complete">Tamamla</button>
+                                        }
+                                        @if (t.Status == RequestStatus.Active)
+                                        {
+                                            <button type="button" class="btn btn-danger btnCancel" data-id="@t.Id">İptal Et</button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        @if (Model.Data.Count == 0)
+                        {
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="empty">
+                                            <div class="empty-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <circle cx="12" cy="12" r="9" />
+                                                    <line x1="9" y1="10" x2="9.01" y2="10" />
+                                                    <line x1="15" y1="10" x2="15.01" y2="10" />
+                                                    <path d="M9.5 15.25a3.5 3.5 0 0 1 5 0" />
+                                                </svg>
+                                            </div>
+                                            <p class="empty-title">Henüz Talep Yayınlamadın</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-blur fade" id="modal-request-complete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form class="modal-content" id="formComplete" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title">Şirketi Değerlendir</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Puan girin</label>
+                    <select name="rating" class="form-select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Yorum yazın</label>
+                    <textarea name="comment" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Kapat</button>
+                <button type="submit" class="btn btn-primary">Tamamla</button>
+            </div>
+            @Html.Hidden("Id")
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(".btnCancel").click(function () {
+            if (confirm("Bu talebi iptal etmek istediğinizden emin misiniz ?")) {
+                $.post("/user/requests/cancel", { id: $(this).data("id") }, function () {
+                    location.reload()
+                })
+            }
+        })
+        $(".btnComplete").click(function () {
+            $(".modal #Id").val($(this).data("id"))
+        })
+        $("#formComplete").submit(function () {
+            $.post("/user/requests/complete", $(this).serialize(), function () {
+                location.reload()
+            })
+            return false
+        })
+    </script>
+}

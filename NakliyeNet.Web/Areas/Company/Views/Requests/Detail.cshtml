@@ -1,0 +1,163 @@
+﻿@using TransportationApp.Domain.Entity;
+@using TransportationApp.Domain.Common;
+@model Request
+@{
+    ViewData["Title"] = $"#{Model.Id} {Model.Category.Name}";
+    var application = Model.RequestApplications.FirstOrDefault(n => n.CompanyId == loggedUser.Id);
+}
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    #@Model.Id @Model.Category.Name
+                </h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+                @if (application == null)
+                {
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-application">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path>
+                        </svg>
+                        Teklif Gönder
+                    </a>
+                }
+                else
+                {
+                    <a href="tel:@Model.User.PhoneNumber" class="btn btn-lime">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+                        </svg>
+                        Ara
+                    </a>
+                    <a href="/company/message/list/@Model.UserId" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+                            <path d="M3 7l9 6l9 -6"></path>
+                        </svg>
+                        Mesaj Gönder
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-body">
+    <div class="container-xl">
+        @if (application != null)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Teklif Detayları</h3>
+                </div>
+                <div class="card-body">
+                    <div class="datagrid">
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Ücret</div>
+                            <div class="datagrid-content">@application.Amount.ToString("N")</div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Durum</div>
+                            <div class="datagrid-content">
+                                @if (application.Status == (int)RequestApplicationStatus.Sent)
+                                {
+                                    <span class="badge bg-info">Gönderildi</span>
+                                }
+                                @if (application.Status == (int)RequestApplicationStatus.Approved)
+                                {
+                                    <span class="badge bg-success">Onaylandı</span>
+                                }
+                                @if (application.Status == (int)RequestApplicationStatus.Cancelled)
+                                {
+                                    <span class="badge bg-secondary">İptal Edildi</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Tarih</div>
+                            <div class="datagrid-content">@application.CreateDate.ToShortDateString()</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="card-title">Talep Detayları</h3>
+            </div>
+            <div class="card-body">
+                <div class="datagrid">
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">Gönderen</div>
+                        <div class="datagrid-content">@Model.User.Name @Model.User.Surname</div>
+                    </div>
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">Gönderen Telefon</div>
+                        <div class="datagrid-content">@Model.User.PhoneNumber</div>
+                    </div>
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">Kategori</div>
+                        <div class="datagrid-content">@Model.Category.Name</div>
+                    </div>
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">Teklif Sayısı</div>
+                        <div class="datagrid-content">@Model.RequestApplications.Count</div>
+                    </div>
+                    @foreach (var p in Model.RequestDetails)
+                    {
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">@p.Property</div>
+                            <div class="datagrid-content">
+                                <div class="d-flex align-items-center">
+                                    @p.Value
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">Tarih</div>
+                        <div class="datagrid-content">@Model.CreateDate.ToShortDateString()</div>
+                    </div>
+                </div>
+                <br />
+                <p><span class="datagrid-title">Açıklama:</span> <br /> @Model.Description</p>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<div class="modal modal-blur fade" id="modal-application" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form class="modal-content" id="formApplication" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title">Teklif Gönder</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Ücret Girin</label>
+                    <input type="number" name="amount" class="form-control" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Kapat</button>
+                <button type="submit" class="btn btn-primary">Gönder</button>
+            </div>
+            @Html.Hidden("RequestId", Model.Id)
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $("#formApplication").submit(function () {
+            $.post("/company/application/send", $(this).serialize(), function (response) {
+                location.reload()
+            })
+            return false
+        })
+    </script>
+}

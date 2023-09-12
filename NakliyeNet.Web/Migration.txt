@@ -1,0 +1,5 @@
+﻿Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=TransportationAppDB;Trusted_Connection=True;" 
+-Provider Microsoft.EntityFrameworkCore.SqlServer 
+-OutputDir Entity 
+-Context AppDbContext 
+-Namespace TransportationApp.Domain.Entity

@@ -1,0 +1,123 @@
+﻿@using TransportationApp.Domain.Models.Message
+@model MessagesModel
+@{
+    ViewData["Title"] = "Messages";
+}
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col">
+                <div class="container py-5">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-6">
+                            <div class="card" id="chat2">
+                                <div class="card-header d-flex justify-content-between p-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="avatar rounded-circle">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <h2 class="fw-bold mb-0">@Model.RecipientName</h2>
+                                            <p class="m-0">Üye</p>
+                                            @Html.HiddenFor(n => n.RecipientId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body messageList" data-mdb-perfect-scrollbar="true" style="position: relative; overflow:auto; height: 400px">
+                                    @foreach (var m in Model.Messages)
+                                    {
+                                        if (m.IsReceived)
+                                        {
+                                            <div class="d-flex flex-row justify-content-start">
+                                                <span class="avatar rounded-circle">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                                    </svg>
+                                                </span>
+                                                <div>
+                                                    <p class="p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">@m.Message</p>
+                                                    <p class="ms-3 mb-3 rounded-3 text-muted">@m.SentDate.ToShortTimeString()</p>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                                                <div>
+                                                    <p class="p-2 me-3 mb-1 text-white rounded-3 bg-primary">@m.Message</p>
+                                                    <p class="me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">@m.SentDate.ToShortTimeString()</p>
+                                                </div>
+                                                <span class="avatar rounded-circle" style="background-image:url(@loggedUser.LogoUrl)"></span>
+                                            </div>
+                                        }
+                                    }
+                                    @if (Model.Messages.Count == 0)
+                                    {
+                                        @if (Model.Messages.Count == 0)
+                                        {
+                                            <div class="empty">
+                                                <div class="empty-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                        <circle cx="12" cy="12" r="9" />
+                                                        <line x1="9" y1="10" x2="9.01" y2="10" />
+                                                        <line x1="15" y1="10" x2="15.01" y2="10" />
+                                                        <path d="M9.5 15.25a3.5 3.5 0 0 1 5 0" />
+                                                    </svg>
+                                                </div>
+                                                <p class="empty-title">Henüz Mesajın Yok</p>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <form id="frmMessage" src="/company/message/send" class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                                    <span class="avatar rounded-circle" style="background-image:url(@loggedUser.LogoUrl)"></span>
+                                    <input type="text" class="form-control form-control-lg" id="txtMessage" placeholder="Mesajınızı girin..." autocomplete="off">
+                                    <a class="ms-3" href="#!">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M10 14l11 -11"></path>
+                                            <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
+                                        </svg>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #chat2 .form-control {
+        border-color: transparent;
+    }
+
+        #chat2 .form-control:focus {
+            border-color: transparent;
+            box-shadow: inset 0px 0px 0px 1px transparent;
+        }
+</style>
+@section Scripts {
+    <script id="tmplMessage" type="text/template">
+        <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+            <div>
+                <p class="p-2 me-3 mb-1 text-white rounded-3 bg-primary" id="text"></p>
+                <p class="me-3 mb-3 rounded-3 text-muted d-flex justify-content-end" id="time"></p>
+            </div>
+            <span class="avatar rounded-circle">
+                <span class="avatar rounded-circle" style="background-image:url(@loggedUser.LogoUrl)"></span>
+            </span>
+        </div>
+    </script>
+    <script src="~/js/pages/message.js"></script>
+}

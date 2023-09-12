@@ -1,0 +1,153 @@
+﻿@model int
+@{
+    Layout = null;
+}
+@if (Model == 1)
+{
+    <div class="mb-3">
+        <label class="form-label">Kaç odalı ev eşyası taşınacak?</label>
+        <select name="RoomType" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>1+1</option>
+            <option>2+1</option>
+            <option>3+1</option>
+            <option>4+1</option>
+            <option>5+1</option>
+            <option>Daha Büyük</option>
+            <option>Sadece Bir Kaç Eşya Taşınacak</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Eski Evden Eşya Nasıl Taşınacak?</label>
+        <select name="OldFloorType" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>Ev giriş katında</option>
+            <option>Ev giriş (zemin) altında</option>
+            <option>Merdiven Kullanılmalı</option>
+            <option>Asansör Kullanılabilir</option>
+            <option>Yük Asansörü Var</option>
+            <option>Modüler Asansör Kullanılmalı</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Yeni Evden Eşya Nasıl Taşınacak?</label>
+        <select name="NewFloorType" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>Ev giriş katında</option>
+            <option>Ev giriş (zemin) altında</option>
+            <option>Merdiven Kullanılmalı</option>
+            <option>Asansör Kullanılabilir</option>
+            <option>Yük Asansörü Var</option>
+            <option>Modüler Asansör Kullanılmalı</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Paketleme için yardım gerekiyor mu?</label>
+        <select name="PackagingType" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>Evet, paketlemeyi nakliyeci yapsın</option>
+            <option>Yalnız mobilya & beyaz eşya paketlensin</option>
+            <option>Hayır, paketlemeyi biz yapalım</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">EMTİA sigortası ister misin?</label>
+        <select name="InsuranceType" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>Hayır, istemiyorum</option>
+            <option>Evet, 20.000 TL teminat istiyorum</option>
+        </select>
+    </div>
+}
+@if (Model == 4)
+{
+    <div class="mb-3">
+        <label class="form-label">Hangi Eşya Taşınacak?</label>
+        <select name="ItemType" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>Buzdolabı</option>
+            <option>Çamaşır Makinası</option>
+            <option>Dolap</option>
+            <option>Koltuk</option>
+        </select>
+    </div>
+}
+@if (Model == 5)
+{
+    <div class="mb-3">
+        <label class="form-label">Hangisine İhtiyacın Var ?</label>
+        <select name="LoadType" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>Paletli Yük Taşıma</option>
+            <option>Konteyner Taşıma</option>
+            <option>Ticari Yük Taşıma</option>
+            <option>Diğer</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Taşınacak yükün ağırlığı yaklaşık ne kadar?</label>
+        <select name="LoadWeight" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>100 kg veya daha az</option>
+            <option>200 kg</option>
+            <option>300 kg</option>
+            <option>500 kg</option>
+            <option>1-5 Ton</option>
+            <option>5-10 Ton</option>
+            <option>10 Ton veya daha fazla</option>
+        </select>
+    </div>
+}
+<div class="mb-3">
+    <label class="form-label">Nakliyeci başka neyi bilmeli / neye dikkat etmeli?</label>
+    <textarea name="Description" rows="5" class="form-control" required></textarea>
+</div>
+<div class="mb-3">
+    <label class="form-label">Eşya/Yük Nereden Taşınacak?</label>
+    <div class="row">
+        <div class="col-6">
+            <select name="FromCity" class="form-select" required>
+                <option value="">Şehir Seçin</option>
+                <option>İstanbul</option>
+                <option>Ankara</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <select name="FromDistrict" class="form-select" required>
+                <option value="">İlçe Seçin</option>
+                <option>Başakşehir</option>
+                <option>Sultanbeyli</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="mb-3">
+    <label class="form-label">Eşya/Yük Nereye Taşınacak?</label>
+    <div class="row">
+        <div class="col-6">
+            <select name="ToCity" class="form-select" required>
+                <option value="">Şehir Seçin</option>
+                <option>İstanbul</option>
+                <option>Ankara</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <select name="ToDistrict" class="form-select" required>
+                <option value="">İlçe Seçin</option>
+                <option>Başakşehir</option>
+                <option>Sultanbeyli</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="mb-3">
+    <label class="form-label">Eşya/Yük Ne zaman Taşınacak?</label>
+    <select name="TransportationTime" class="form-select" required>
+        <option value="">Seçin</option>
+        <option>En kısa zamanda</option>
+        <option>Bir Hafta İçinde</option>
+        <option>Bir Ay İçinde</option>
+        <option>Üç Ay İçinde</option>
+        <option>Sadece Fiyat Bakıyorum</option>
+    </select>
+</div>
