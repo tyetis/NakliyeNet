@@ -38,7 +38,7 @@
                                 <tr>
                                     <td class="sort-name">#@t.Id</td>
                                     <td class="sort-city"><a href="/company/requests/detail/@t.RequestId">@t.Request.Category.Name</a></td>
-                                    <td class="sort-type">@t.Amount.ToString("N")</td>
+                                    <td class="sort-type">@t.Amount.ToString("C0")</td>
                                     <td class="sort-score">@t.CreateDate.ToShortDateString()</td>
                                     <td class="sort-score">
                                         @if (t.Status == (int)RequestApplicationStatus.Sent)

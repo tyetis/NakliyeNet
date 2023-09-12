@@ -45,7 +45,7 @@ namespace TransportationApp.Application.Services
 
         public Company GetCompany(int id)
         {
-            return RepoCompany.GetAll(n => n.Id == id).Include(n => n.CompanyVehicle).Include(n => n.CompanyTeam)
+            return RepoCompany.GetAll(n => n.Id == id).Include(n => n.CompanyVehicles).Include(n => n.CompanyTeam)
                               .Include(n => n.RequestApplications).ThenInclude(n => n.Request)
                               .Include(n => n.CompanyComments).ThenInclude(n => n.User).FirstOrDefault();
         }
@@ -67,27 +67,14 @@ namespace TransportationApp.Application.Services
             UnitOfWork.SaveChanges();
         }
 
-        public CompanyVehicle GetProfileVehicle()
+        public List<CompanyVehicle> GetProfileVehicles()
         {
-            return RepoVehicle.Get(n => n.CompanyId == LoggedUser.Id);
+            return RepoVehicle.GetAll(n => n.CompanyId == LoggedUser.Id).ToList();
         }
 
         public CompanyTeam GetProfileTeam()
         {
             return RepoTeam.Get(n => n.CompanyId == LoggedUser.Id);
-        }
-
-        public void UpdateVehicle(CompanyVehicle model)
-        {
-            var entity = GetProfileVehicle();
-            if(entity == null)
-            {
-                entity = new CompanyVehicle { CompanyId = LoggedUser.Id };
-                RepoVehicle.Add(entity);
-            }
-            entity.BrandModel = model.BrandModel;
-            entity.LicenseNo = model.LicenseNo;
-            UnitOfWork.SaveChanges();
         }
 
         public void UpdateTeam(CompanyTeam model)
@@ -116,6 +103,20 @@ namespace TransportationApp.Application.Services
             RepoCompany.Add(entity);
             UnitOfWork.SaveChanges();
             return entity;
+        }
+
+        public void AddVehicle(CompanyVehicle model)
+        {
+            model.CompanyId = LoggedUser.Id;
+            RepoVehicle.Add(model);
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteVehicle(int id)
+        {
+            var entity = RepoVehicle.GetById(id);
+            RepoVehicle.Delete(entity);
+            UnitOfWork.SaveChanges();
         }
     }
 }

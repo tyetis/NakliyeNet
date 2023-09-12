@@ -36,6 +36,12 @@
             <div class="card card-md">
                 <div class="card-body">
                     <h2 class="h2 text-center mb-4">Şirket Girişi</h2>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary()
+                        </div>
+                    }
                     <form method="post" autocomplete="off">
                         <div class="mb-3">
                             <label class="form-label">Email</label>

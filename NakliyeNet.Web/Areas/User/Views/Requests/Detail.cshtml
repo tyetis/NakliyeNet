@@ -135,7 +135,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>@a.Amount.ToString("N")</td>
+                                <td>@a.Amount.ToString("C0")</td>
                                 <td>@a.CreateDate.ToShortDateString()</td>
                                 <td>
                                     @if (a.Status == (int)RequestApplicationStatus.Sent)

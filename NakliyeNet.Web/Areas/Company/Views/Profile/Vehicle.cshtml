@@ -1,5 +1,5 @@
 ﻿@using TransportationApp.Domain.Entity
-@model CompanyVehicle
+@model List<CompanyVehicle>
 @{
     ViewData["Title"] = "Aracım";
 }
@@ -30,17 +30,36 @@
                 <div class="col d-flex flex-column">
                     <form method="post">
                         <div class="card-body">
-                            <h3 class="card-title mt-4">Araç Bilgileri</h3>
-                            <div class="row g-3">
-                                <div class="col-md">
-                                    <div class="form-label">Marka/Model</div>
-                                    @Html.TextBoxFor(n => n.BrandModel, new { @class = "form-control" })
-                                </div>
-                                <div class="col-md">
-                                    <div class="form-label">License No</div>
-                                    @Html.TextBoxFor(n => n.LicenseNo, new { @class = "form-control" })
-                                </div>
-                            </div>
+                            <h3 class="card-title mt-4">
+                                Araç Bilgileri
+                                <button type="button" class="btn btn-success" style="float:right" data-bs-toggle="modal" data-bs-target="#modal-vehicle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                                    Araç Ekle
+                                </button>
+                            </h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Araç Tipi</th>
+                                        <th>Marka/Model</th>
+                                        <th>Plaka</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var v in Model)
+                                    {
+                                        <tr>
+                                            <td>@v.Type</td>
+                                            <td>@v.BrandModel</td>
+                                            <td>@v.LicenseNo</td>
+                                            <td>
+                                                <button type="button" class="btnDeleteVehicle btn btn-danger" data-id="@v.Id">Aracı Sil</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                         <div class="card-footer bg-transparent mt-auto">
                             <div class="btn-list justify-content-end">
@@ -58,3 +77,54 @@
         </div>
     </div>
 </div>
+<div class="modal modal-blur fade" id="modal-vehicle" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form class="modal-content" id="formVehicle" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title">Araç Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Araç Tipi</label>
+                    @Html.DropDownList("Type", new List<SelectListItem>
+               {
+                   new SelectListItem{ Text = "Tır" },
+                   new SelectListItem{ Text = "Kamyon" },
+                   new SelectListItem{ Text = "Kamyonet" },
+                   new SelectListItem{ Text = "Minibüs" }
+               }, new { @class = "form-select", required = "" })
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Marka/Model</label>
+                    @Html.TextBox("BrandModel", "", new { @class = "form-control", required = "" })
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">License No</label>
+                    @Html.TextBox("LicenseNo", "", new { @class = "form-control", required = "" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Kapat</button>
+                <button type="submit" class="btn btn-primary">Gönder</button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $("#formVehicle").submit(function () {
+            $.post("/company/profile/addVehicle", $(this).serialize(), function () {
+                location.reload()
+            })
+            return false
+        })
+        $(".btnDeleteVehicle").click(function () {
+            if (confirm("Aracı silmek istediğinizden emin misiniz ?")) {
+                $.post("/company/profile/deleteVehicle", { id: $(this).data("id") }, function () {
+                    location.reload()
+                })
+            }
+        })
+    </script>
+}

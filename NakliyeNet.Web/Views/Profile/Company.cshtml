@@ -64,17 +64,24 @@
                     <div class="card-header">
                         <h3 class="card-title">Araç Bilgileri</h3>
                     </div>
-                    <div class="card-body">
-                        <div class="datagrid">
-                            <div class="datagrid-item">
-                                <div class="datagrid-title">Marka/Model</div>
-                                <div class="datagrid-content">@Model.CompanyVehicle?.BrandModel</div>
+                    <div class="card-body p-0 list-group card-list-group">
+                        @foreach (var v in Model.CompanyVehicles)
+                        {
+                            <div class="datagrid list-group-item">
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">Araç Tipi</div>
+                                    <div class="datagrid-content">@v.Type</div>
+                                </div>
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">Marka/Model</div>
+                                    <div class="datagrid-content">@v.BrandModel</div>
+                                </div>
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">Plaka</div>
+                                    <div class="datagrid-content">@v.LicenseNo</div>
+                                </div>
                             </div>
-                            <div class="datagrid-item">
-                                <div class="datagrid-title">Plaka</div>
-                                <div class="datagrid-content">@Model.CompanyVehicle?.LicenseNo</div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
                 <br />

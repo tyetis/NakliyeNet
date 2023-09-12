@@ -17,7 +17,7 @@ namespace TransportationApp.Domain.Entity
         public DateTime? CreateDate { get; set; }
 
         public virtual CompanyTeam CompanyTeam { get; set; }
-        public virtual CompanyVehicle CompanyVehicle { get; set; }
+        public virtual ICollection<CompanyVehicle> CompanyVehicles { get; set; }
         public virtual ICollection<CompanyComment> CompanyComments { get; set; }
         public virtual ICollection<RequestApplication> RequestApplications { get; set; }
     }

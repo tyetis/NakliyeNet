@@ -49,15 +49,22 @@ namespace TransportationApp.Areas.Company.Controllers
         [HttpGet]
         public IActionResult Vehicle()
         {
-            var vehicle = CompanyService.GetProfileVehicle();
-            return View(vehicle);
+            var vehicles = CompanyService.GetProfileVehicles();
+            return View(vehicles);
         }
 
         [HttpPost]
-        public IActionResult Vehicle(CompanyVehicle model)
+        public IActionResult AddVehicle(CompanyVehicle model)
         {
-            CompanyService.UpdateVehicle(model);
-            return View();
+            CompanyService.AddVehicle(model);
+            return Json(true);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteVehicle(int id)
+        {
+            CompanyService.DeleteVehicle(id);
+            return Json(true);
         }
 
         [HttpGet]

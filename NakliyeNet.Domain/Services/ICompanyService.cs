@@ -14,12 +14,13 @@ namespace TransportationApp.Domain.Services
         Company GetCompany(string email, string password);
         Company GetCompany(int id);
         Company GetProfile();
-        CompanyVehicle GetProfileVehicle();
+        List<CompanyVehicle> GetProfileVehicles();
         CompanyTeam GetProfileTeam();
         PaginationResult<Company> GetCompanies();
         Company SignUp(SignUpModel model);
         void Update(Company model);
-        void UpdateVehicle(CompanyVehicle model);
+        void AddVehicle(CompanyVehicle model);
+        void DeleteVehicle(int id);
         void UpdateTeam(CompanyTeam model);
     }
 }

@@ -38,6 +38,12 @@
             <form class="card card-md" method="post" autocomplete="off" novalidate>
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Şirket Hesabı Oluştur</h2>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary()
+                        </div>
+                    }
                     <div class="mb-3">
                         <label class="form-label">Şirket İsmi</label>
                         @Html.TextBoxFor(n => n.Name, new { @class = "form-control", placeholder = "Şirket İsmi", required = "" })

@@ -42,7 +42,10 @@ namespace TransportationApp.Controllers
         {
             var user = UserService.GetUser(viewModel.Email, viewModel.Password);
             if (user == null)
-                ModelState.AddModelError("", "User Not Found");
+            {
+                ModelState.AddModelError("", "Kullanıcı Bulunamadı");
+                return View();
+            }
             else
             {
                 await MembershipService.LoginAsync(new LoggedUser
@@ -51,8 +54,8 @@ namespace TransportationApp.Controllers
                     Type = (int)MemberType.User,
                     UserName = $"{user.Name} {user.Surname}"
                 });
+                return Redirect("/user/requests/list");
             }
-            return Redirect("/user/requests/list");
         }
 
         [HttpPost]
@@ -60,7 +63,10 @@ namespace TransportationApp.Controllers
         {
             var company = CompanyService.GetCompany(viewModel.Email, viewModel.Password);
             if (company == null)
-                ModelState.AddModelError("", "Company Not Found");
+            {
+                ModelState.AddModelError("", "Kullanıcı Bulunamadı");
+                return View();
+            }
             else
             {
                 await MembershipService.LoginAsync(new LoggedUser
@@ -70,8 +76,8 @@ namespace TransportationApp.Controllers
                     UserName = $"{company.Name}",
                     LogoUrl = company.LogoUrl
                 });
+                return Redirect("/company/requests/list");
             }
-            return Redirect("/company/requests/list");
         }
 
         public IActionResult Logout()
