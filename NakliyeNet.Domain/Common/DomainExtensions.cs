@@ -11,9 +11,9 @@ namespace TransportationApp.Domain.Common
         public static string DateTimeFormat(this DateTime datetime)
         {
             if (DateTime.Now - datetime <= TimeSpan.FromHours(1)) return $"{(DateTime.Now - datetime).Minutes} Dakika";
-            else if (DateTime.Now - datetime <= TimeSpan.FromDays(1)) return $"{(DateTime.Now - datetime).Hours} Saat";
-            else if (DateTime.Today.Year - datetime.Year >= 1) return $"{DateTime.Today.Year - datetime.Year} Yıl";
-            else return datetime.ToShortDateString();
+            else if (DateTime.Now - datetime <= TimeSpan.FromHours(24)) return $"{(DateTime.Now - datetime).Hours} Saat";
+            else if (DateTime.Today.Year - datetime.Year <= 1) return $"{(DateTime.Now - datetime).Days} Gün";
+            else return $"{DateTime.Today.Year - datetime.Year} Yıl";        
         }
     }
 }

@@ -454,8 +454,8 @@
 
 .footer .btn.btn-link::before {
     position: relative;
-    content: "\f105";
-    font-family: "Font Awesome 5 Free";
+    content: "\f111";
+    font-family: "FontAwesome";
     font-weight: 900;
     margin-right: 10px;
 }

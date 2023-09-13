@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,14 @@ namespace TransportationApp.Infrastructure
             services.AddScoped<DbContext, AppDbContext>();
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value);
+                options.UseSqlServer(GetConnectionString(configuration));
             });
+        }
+        
+        private static string GetConnectionString(IConfiguration configuration)
+        {
+            var rootFolder = Directory.GetParent(Environment.CurrentDirectory);
+            return string.Format(configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value, rootFolder);
         }
     }
 }

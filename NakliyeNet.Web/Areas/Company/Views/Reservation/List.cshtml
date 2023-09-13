@@ -27,6 +27,7 @@
                                 <th><button class="table-sort desc" data-sort="sort-type">Talep</button></th>
                                 <th><button class="table-sort desc" data-sort="sort-type">Üye</button></th>
                                 <th><button class="table-sort" data-sort="sort-score">Reservasyon Tarihi</button></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody class="table-tbody">
@@ -37,6 +38,9 @@
                                     <td class="sort-city"><a href="/company/requests/detail/@t.RequestId">@t.Request.Category.Name</a></td>
                                     <td>@t.Request.User.Name @t.Request.User.Surname</td>
                                     <td class="sort-score">@t.ReservationDate.ToShortDateString()</td>
+                                    <td>
+                                        <a href="/company/requests/detail/@t.RequestId" class="btn btn-primary">Talep Detayı</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
