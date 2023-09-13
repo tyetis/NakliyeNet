@@ -24,11 +24,11 @@
                     <table class="table table-hover" style="vertical-align:middle">
                         <thead>
                             <tr>
-                                <th><button class="table-sort" data-sort="sort-name">Başvuru Id</button></th>
-                                <th><button class="table-sort desc" data-sort="sort-type">Kategori</button></th>
-                                <th><button class="table-sort desc" data-sort="sort-type">Ücret</button></th>
-                                <th><button class="table-sort" data-sort="sort-score">Teklif Tarihi</button></th>
-                                <th><button class="table-sort" data-sort="sort-score">Durum</button></th>
+                                <th>Teklif Id</th>
+                                <th>Kategori</th>
+                                <th>Ücret</th>
+                                <th>Teklif Tarihi</th>
+                                <th>Durum</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -58,7 +58,7 @@
                                         <a href="/company/requests/detail/@t.RequestId" class="btn btn-primary">Talep Detayı</a>
                                         @if (t.Status == (int)RequestApplicationStatus.Sent)
                                         {
-                                            <a href="" class="btn btn-danger">Geri Çek</a>
+                                            <button type="button" class="btn btn-danger btnCancel" data-id="@t.Id">Geri Çek</button>
                                         }
                                     </td>
                                 </tr>
@@ -91,3 +91,14 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(".btnCancel").click(function () {
+            if (confirm("Bu teklifi geri çekmek istediğinizden emin misiniz ?")) {
+                $.post("/company/application/cancel", { applicationId: $(this).data("id") }, function () {
+                    location.reload();
+                })
+            }
+        })
+    </script>
+}

@@ -14,6 +14,6 @@ namespace TransportationApp.Domain.Services
         PaginationResult<RequestApplication> GetApplications(int companyId);
         void Send(int requestId, decimal amount);
         void Approve(int requestId);
-        void SetReservation(int applicationId, DateTime date);
+        void SetReservation(int applicationId, DateTime date, string desc);
     }
 }

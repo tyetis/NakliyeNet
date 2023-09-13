@@ -32,5 +32,12 @@ namespace TransportationApp.Areas.Company.Controllers
             RequestService.Send(requestId, amount);
             return Json(true);
         }
+
+        [HttpPost]
+        public IActionResult Cancel(int applicationId)
+        {
+            RequestService.Cancel(applicationId);
+            return Json(true);
+        }
     }
 }

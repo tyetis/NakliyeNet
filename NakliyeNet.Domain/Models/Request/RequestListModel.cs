@@ -16,6 +16,7 @@ namespace TransportationApp.Domain.Models.Request
         public string UserImageUrl { get; set; }
         public int ApplicationCount { get; set; }
         public decimal ApplicationAmount { get; set; }
+        public List<string> ApplicationImages{ get; set; }
         public string ImageUrl { get; set; }
         public List<RequestDetail> Details { get; set; }
         public RequestStatus Status { get; set; }

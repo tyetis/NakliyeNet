@@ -70,7 +70,7 @@ namespace TransportationApp.Application.Services
             UnitOfWork.SaveChanges();
         }
 
-        public void SetReservation(int applicationId, DateTime date)
+        public void SetReservation(int applicationId, DateTime date, string desc)
         {
             var application = RepoApplication.GetById(applicationId);
             RepoReservation.Add(new Reservation
@@ -78,6 +78,7 @@ namespace TransportationApp.Application.Services
                 RequestId = application.RequestId,
                 CompanyId = application.CompanyId,
                 ReservationDate = date,
+                Description = desc,
                 CreateDate = DateTime.Now
             });
             UnitOfWork.SaveChanges();

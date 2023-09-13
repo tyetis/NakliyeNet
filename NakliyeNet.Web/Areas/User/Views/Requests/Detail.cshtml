@@ -99,6 +99,10 @@
                             <div class="datagrid-title">Reservasyon Tarihi</div>
                             <div class="datagrid-content">@reservation.ReservationDate.ToShortDateString()</div>
                         </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">Reservasyon Notları</div>
+                            <div class="datagrid-content">@reservation.Description</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,7 +157,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-primary" href="/profile/company/@a.CompanyId">Şirket Profili</a>
-                                    @if (isActiveRequest)
+                                    @if (isActiveRequest && a.Status == (int)RequestApplicationStatus.Sent)
                                     {
                                         <button class="btn btn-success btnApprove" type="button" data-id="@a.Id">Teklifi Onayla</button>
                                     }
@@ -201,7 +205,11 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label class="form-label">Tarih Girin</label>
-                    <input type="datetime" name="reservationDate" class="form-control" required>
+                    <input type="datetime" name="reservationDate" class="form-control" id="resdatepicker" required autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Rezervasyon Notları</label>
+                    <textarea name="description" class="form-control" id="resdatepicker" required></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -213,6 +221,7 @@
     </div>
 </div>
 @section Scripts {
+    <script src="/libs/litepicker/dist/litepicker.js"></script>
     <script>
         $(".btnApprove").click(function () {
             $.post("/user/application/approve", { id: $(this).data("id") }, function () {
@@ -227,6 +236,15 @@
                 location.reload()
             })
             return false
+        })
+        new Litepicker({
+            element: document.getElementById('resdatepicker'),
+            buttonText: {
+                previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+                nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+            },
         })
     </script>
 }

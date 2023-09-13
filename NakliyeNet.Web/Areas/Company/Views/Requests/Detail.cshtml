@@ -3,7 +3,7 @@
 @model Request
 @{
     ViewData["Title"] = $"#{Model.Id} {Model.Category.Name}";
-    var application = Model.RequestApplications.FirstOrDefault(n => n.CompanyId == loggedUser.Id);
+    var application = Model.RequestApplications.LastOrDefault(n => n.CompanyId == loggedUser.Id);
 }
 <div class="page-header d-print-none">
     <div class="container-xl">

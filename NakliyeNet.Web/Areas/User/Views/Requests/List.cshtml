@@ -45,12 +45,19 @@
                                     <td class="sort-name">#@t.Id</td>
                                     <td class="sort-type"><a href="/user/requests/detail/@t.Id">@t.Category</a></td>
                                     <td class="sort-type">
-                                        <div class="avatar-list avatar-list-stacked">
-                                            <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                            <span class="avatar avatar-xs rounded">JL</span>
-                                            <span class="avatar avatar-xs rounded" style="background-image: url(./static/avatars/002m.jpg)"></span>
-                                            <span class="avatar avatar-xs rounded">+@t.ApplicationCount</span>
-                                        </div>
+                                        @if (t.ApplicationCount == 0)
+                                        {
+                                            <span class="badge bg-gradient">Teklif Yok</span>
+                                        }
+                                        else
+                                        {
+                                            <div class="avatar-list avatar-list-stacked">
+                                                @foreach (var a in t.ApplicationImages)
+                                                {
+                                                    <span class="avatar avatar-xs rounded" style="background-image: url(@a)"></span>
+                                                }
+                                            </div>
+                                        }
                                     </td>
                                     <td class="sort-score">@t.CreateDate.ToShortDateString()</td>
                                     <td class="sort-score">

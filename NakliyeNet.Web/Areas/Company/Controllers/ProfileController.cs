@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TransportationApp.Application.Models.Membership;
 using TransportationApp.Domain.Entity;
 using TransportationApp.Domain.Services;
 using TransportationApp.Web.Areas.Company.Models.Profile;
@@ -17,11 +18,13 @@ namespace TransportationApp.Areas.Company.Controllers
     {
         ICompanyService CompanyService { get; set; }
         IWebHostEnvironment _hostingEnvironment { get; set; }
+        LoggedUser LoggedUser { get; set; }
 
-        public ProfileController(ICompanyService companyService, IWebHostEnvironment environment)
+        public ProfileController(ICompanyService companyService, IWebHostEnvironment environment, LoggedUser loggedUser)
         {
             CompanyService = companyService;
             _hostingEnvironment = environment;
+            LoggedUser = loggedUser;
         }
 
         [HttpGet]

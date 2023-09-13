@@ -10,6 +10,7 @@ namespace TransportationApp.Domain.Entity
         public int Id { get; set; }
         public int RequestId { get; set; }
         public int CompanyId { get; set; }
+        public string Description { get; set; }
         public DateTime ReservationDate { get; set; }
         public DateTime CreateDate { get; set; }
 

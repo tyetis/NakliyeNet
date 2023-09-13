@@ -39,6 +39,7 @@ namespace TransportationApp.Application.Services
                 UserImageUrl = n.User.ImageUrl,
                 ApplicationCount = n.RequestApplications.Count,
                 ApplicationAmount = n.RequestApplications.Where(a => a.CompanyId == LoggedUser.Id).Select(n => n.Amount).FirstOrDefault(),
+                ApplicationImages = n.RequestApplications.Select(r => r.Company.LogoUrl).ToList(),
                 Details = n.RequestDetails.ToList(),
                 Status = (RequestStatus)n.Status,
                 CreateDate = n.CreateDate

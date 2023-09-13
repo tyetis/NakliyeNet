@@ -30,9 +30,9 @@ namespace TransportationApp.Areas.User.Controllers
         }
 
         [HttpPost]
-        public IActionResult SetReservation(int applicationId, DateTime reservationDate)
+        public IActionResult SetReservation(int applicationId, DateTime reservationDate, string description)
         {
-            ApplicationService.SetReservation(applicationId, reservationDate);
+            ApplicationService.SetReservation(applicationId, reservationDate, description);
             return Json(true);
         }
     }
