@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Services;
+using NakliyeNet.Domain.Services;
 
-namespace TransportationApp.Areas.Company.Controllers
+namespace NakliyeNet.Areas.Company.Controllers
 {
     [Area("Company")]
     public class MessageController : Controller

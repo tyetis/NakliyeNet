@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Entity;
-using TransportationApp.Domain.Models.Common;
+using NakliyeNet.Domain.Entity;
+using NakliyeNet.Domain.Models.Common;
 
-namespace TransportationApp.Domain.Services
+namespace NakliyeNet.Domain.Services
 {
     public interface IReservationService
     {

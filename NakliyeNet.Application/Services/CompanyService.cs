@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
-using TransportationApp.Domain.Entity;
-using TransportationApp.Domain.Models.Common;
-using TransportationApp.Domain.Models.Membership;
-using TransportationApp.Domain.Repository;
-using TransportationApp.Domain.Services;
+using NakliyeNet.Application.Models.Membership;
+using NakliyeNet.Domain.Entity;
+using NakliyeNet.Domain.Models.Common;
+using NakliyeNet.Domain.Models.Membership;
+using NakliyeNet.Domain.Repository;
+using NakliyeNet.Domain.Services;
 
-namespace TransportationApp.Application.Services
+namespace NakliyeNet.Application.Services
 {
     public class CompanyService : BaseService, ICompanyService
     {

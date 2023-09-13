@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace TransportationApp.Domain.Repository
+namespace NakliyeNet.Domain.Repository
 {
     public interface IRepository<T> where T : class
     {

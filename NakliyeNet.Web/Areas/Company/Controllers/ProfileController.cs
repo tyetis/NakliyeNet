@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
-using TransportationApp.Domain.Entity;
-using TransportationApp.Domain.Services;
-using TransportationApp.Web.Areas.Company.Models.Profile;
-using TransportationApp.Web.Utils;
+using NakliyeNet.Application.Models.Membership;
+using NakliyeNet.Domain.Entity;
+using NakliyeNet.Domain.Services;
+using NakliyeNet.Web.Areas.Company.Models.Profile;
+using NakliyeNet.Web.Utils;
 
-namespace TransportationApp.Areas.Company.Controllers
+namespace NakliyeNet.Areas.Company.Controllers
 {
     [Area("Company")]
     public class ProfileController : Controller

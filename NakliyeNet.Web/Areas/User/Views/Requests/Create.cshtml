@@ -1,4 +1,4 @@
-﻿@using TransportationApp.Domain.Models.Request
+﻿@using NakliyeNet.Domain.Models.Request
 @model CreateRequestModel
 @{
     ViewData["Title"] = "Create Transportation Request";
@@ -46,7 +46,27 @@
         $("#category").change(function () {
             $.post("/user/requests/createProperties", { categoryId: $(this).val() }, function (response) {
                 $("#requestProperties").html(response)
+                loadCities()
             })
         })
+        $("body").on("change", ".selCity", function () {
+            var selDistrict = $("[name=" + $(this).data("fill") + "]")
+            $.post("/home/getDistricts", { city: $(this).val() }, function (districts) {
+                selDistrict.empty().append("<option>İlçe Seçiniz</option>")
+                for (d of districts) {
+                    selDistrict.append("<option>" + d + "</option>")
+                }
+            })
+        })
+        function loadCities() {
+            $.post("/home/getCities", function (cities) {
+                $(".selCity").each(function () {
+                    $(this).empty().append("<option>Şehir Seçiniz</option>")
+                    for (c of cities) {
+                        $(this).append("<option>" + c + "</option>")
+                    }
+                })
+            })
+        }
     </script>
 }

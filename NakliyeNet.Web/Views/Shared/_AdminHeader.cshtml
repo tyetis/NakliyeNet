@@ -21,11 +21,7 @@
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                    @if (loggedUser.LogoUrl != null)
-                    {
-                        <span class="avatar avatar-sm" style="background-image:url(@loggedUser.LogoUrl)"></span>
-                    }
-                    else
+                    @if (string.IsNullOrEmpty(loggedUser.LogoUrl))
                     {
                         <span class="avatar">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon avatar-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -34,7 +30,11 @@
                                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
                             </svg>
                         </span>
-                     }
+                    }
+                    else
+                    {
+                        <span class="avatar avatar-sm" style="background-image:url(@loggedUser.LogoUrl)"></span>
+                    }
                     <div class="d-none d-xl-block ps-2">
                         <div>@loggedUser.UserName</div>
                         <div class="mt-1 small text-muted">@(loggedUser.Type == 1 ? "Üye" : "Şirket")</div>
@@ -43,7 +43,7 @@
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     @if (loggedUser.Type == 1)
                     {
-                        <a href="" class="dropdown-item">Hesabım</a>
+                        <a href="" class="dropdown-item"><i class="fa fa-cog"></i> &nbsp; Hesabım</a>
                     }
                     @if (loggedUser.Type == 2)
                     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TransportationApp.Domain.Repository
+namespace NakliyeNet.Domain.Repository
 {
     public interface IUnitOfWork : IDisposable
     {

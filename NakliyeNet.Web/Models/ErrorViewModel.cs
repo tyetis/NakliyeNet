@@ -1,6 +1,6 @@
 using System;
 
-namespace TransportationApp.Models
+namespace NakliyeNet.Models
 {
     public class ErrorViewModel
     {

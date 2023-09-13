@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NakliyeNet.Application.Services;
+using NakliyeNet.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
-using TransportationApp.Application.Services;
-using TransportationApp.Domain.Services;
+using NakliyeNet.Application.Models.Membership;
+using NakliyeNet.Application.Services;
 
-namespace TransportationApp.Application
+namespace NakliyeNet.Application
 {
     public static class ServiceExtensions
     {
@@ -22,6 +22,7 @@ namespace TransportationApp.Application
             services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IReservationService, ReservationService>();
+            services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IMembershipService, MembershipService>();
             services.AddScoped(n => n.GetRequiredService<IMembershipService>().LoggedUser);
         }

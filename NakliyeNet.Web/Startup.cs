@@ -12,11 +12,11 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using TransportationApp.Application;
-using TransportationApp.Domain.Common;
-using TransportationApp.Infrastructure;
+using NakliyeNet.Application;
+using NakliyeNet.Domain.Common;
+using NakliyeNet.Infrastructure;
 
-namespace TransportationApp
+namespace NakliyeNet
 {
     public class Startup
     {

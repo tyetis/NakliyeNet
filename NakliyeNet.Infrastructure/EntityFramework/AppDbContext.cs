@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NakliyeNet.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Entity;
 
-namespace TransportationApp.Infrastructure.EntityFramework
+namespace NakliyeNet.Infrastructure.EntityFramework
 {
     public class AppDbContext: DbContext
     {
@@ -30,6 +30,7 @@ namespace TransportationApp.Infrastructure.EntityFramework
         public virtual DbSet<RequestApplication> RequestApplications { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
     }
 }

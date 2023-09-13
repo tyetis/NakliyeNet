@@ -1,22 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NakliyeNet.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Services;
-using TransportationApp.Models;
+using NakliyeNet.Domain.Services;
+using NakliyeNet.Models;
 
-namespace TransportationApp.Controllers
+namespace NakliyeNet.Controllers
 {
     public class HomeController : Controller
     {
+        private ILocationService LocationService { get; set; }
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ILocationService locationService)
         {
             _logger = logger;
+            LocationService = locationService;
         }
 
         public IActionResult Index()
@@ -33,6 +36,18 @@ namespace TransportationApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult GetCities()
+        {
+            return Json(LocationService.GetCities());
+        }
+
+        [HttpPost]
+        public IActionResult GetDistricts(string city)
+        {
+            return Json(LocationService.GetDistrict(city));
         }
     }
 }

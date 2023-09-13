@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Entity;
-using TransportationApp.Domain.Models.Common;
-using TransportationApp.Domain.Models.Request;
+using NakliyeNet.Domain.Entity;
+using NakliyeNet.Domain.Models.Common;
+using NakliyeNet.Domain.Models.Request;
 
-namespace TransportationApp.Domain.Services
+namespace NakliyeNet.Domain.Services
 {
     public interface IRequestService
     {

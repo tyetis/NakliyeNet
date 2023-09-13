@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TransportationApp.Web.Utils
+namespace NakliyeNet.Web.Utils
 {
     public static class WebUtils
     {

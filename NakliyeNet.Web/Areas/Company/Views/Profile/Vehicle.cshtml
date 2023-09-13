@@ -1,4 +1,4 @@
-﻿@using TransportationApp.Domain.Entity
+﻿@using NakliyeNet.Domain.Entity
 @model List<CompanyVehicle>
 @{
     ViewData["Title"] = "Aracım";
@@ -100,7 +100,7 @@
                     @Html.TextBox("BrandModel", "", new { @class = "form-control", required = "" })
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">License No</label>
+                    <label class="form-label">Plaka No</label>
                     @Html.TextBox("LicenseNo", "", new { @class = "form-control", required = "" })
                 </div>
             </div>

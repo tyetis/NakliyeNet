@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TransportationApp.Web.Models.Membership
+namespace NakliyeNet.Web.Models.Membership
 {
     public class LoginViewModel
     {

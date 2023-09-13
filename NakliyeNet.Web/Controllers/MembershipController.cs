@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
-using TransportationApp.Application.Services;
-using TransportationApp.Domain.Common;
-using TransportationApp.Domain.Models.Membership;
-using TransportationApp.Domain.Services;
-using TransportationApp.Web.Models.Membership;
+using NakliyeNet.Application.Models.Membership;
+using NakliyeNet.Application.Services;
+using NakliyeNet.Domain.Common;
+using NakliyeNet.Domain.Models.Membership;
+using NakliyeNet.Domain.Services;
+using NakliyeNet.Web.Models.Membership;
 
-namespace TransportationApp.Controllers
+namespace NakliyeNet.Controllers
 {
     public class MembershipController : Controller
     {
@@ -99,12 +99,23 @@ namespace TransportationApp.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpModel model)
         {
-            var user = UserService.SignUp(model);
+            var hasUser = UserService.GetUser(model.Email, model.Password);
+            if (hasUser != null)
+            {
+                ModelState.AddModelError("", "Kullanıcı zaten var");
+                return View();
+            }
+            else if (model.Password != model.AgainPassword)
+            {
+                ModelState.AddModelError("", "Şifreler uyuşmuyor");
+                return View();
+            }
+            var newUser = UserService.SignUp(model);
             await MembershipService.LoginAsync(new LoggedUser
             {
-                Id = user.Id,
+                Id = newUser.Id,
                 Type = (int)MemberType.User,
-                UserName = $"{user.Name} {user.Surname}"
+                UserName = $"{newUser.Name} {newUser.Surname}"
             });
             return Redirect("/user/requests/list");
         }
@@ -112,6 +123,17 @@ namespace TransportationApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CompanySignUp(SignUpModel model)
         {
+            var hasUser = CompanyService.GetCompany(model.Email, model.Password);
+            if (hasUser != null)
+            {
+                ModelState.AddModelError("", "Kullanıcı zaten var");
+                return View();
+            }
+            else if(model.Password != model.AgainPassword)
+            {
+                ModelState.AddModelError("", "Şifreler uyuşmuyor");
+                return View();
+            }
             var user = CompanyService.SignUp(model);
             await MembershipService.LoginAsync(new LoggedUser
             {

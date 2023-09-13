@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransportationApp.Domain.Models.Request
+namespace NakliyeNet.Domain.Models.Request
 {
     public class CreateRequestModel
     {

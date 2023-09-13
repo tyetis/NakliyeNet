@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TransportationApp.Web.Areas.Company.Models.Profile
+namespace NakliyeNet.Web.Areas.Company.Models.Profile
 {
     public class CompanyModel
     {

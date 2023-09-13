@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransportationApp.Domain.Models.Message
+namespace NakliyeNet.Domain.Models.Message
 {
     public class MessagesModel
     {

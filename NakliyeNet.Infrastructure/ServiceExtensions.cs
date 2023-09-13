@@ -7,11 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Repository;
-using TransportationApp.Infrastructure.EntityFramework;
-using TransportationApp.Infrastructure.EntityFramework.Repository;
+using NakliyeNet.Domain.Repository;
+using NakliyeNet.Infrastructure.EntityFramework;
+using NakliyeNet.Infrastructure.EntityFramework.Repository;
 
-namespace TransportationApp.Infrastructure
+namespace NakliyeNet.Infrastructure
 {
     public static class ServiceExtensions
     {

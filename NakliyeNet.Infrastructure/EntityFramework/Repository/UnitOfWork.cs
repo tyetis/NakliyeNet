@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using TransportationApp.Domain.Repository;
+using NakliyeNet.Domain.Repository;
 
-namespace TransportationApp.Infrastructure.EntityFramework.Repository
+namespace NakliyeNet.Infrastructure.EntityFramework.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

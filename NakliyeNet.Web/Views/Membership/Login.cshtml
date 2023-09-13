@@ -1,4 +1,4 @@
-﻿@using TransportationApp.Web.Models.Membership
+﻿@using NakliyeNet.Web.Models.Membership
 @{
     Layout = null;
 }
@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sign in</title>
+    <title>Üye Girişi | NakliyeNet</title>
     <!-- CSS files -->
     <link href="/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
@@ -29,54 +29,61 @@
 <body class=" d-flex flex-column">
     <script src="/js/demo-theme.min.js?1684106062"></script>
     <div class="page page-center">
-        <div class="container container-tight py-4">
-            <div class="text-center mb-4">
-                <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36" alt=""></a>
-            </div>
-            <div class="card card-md">
-                <div class="card-body">
-                    <h2 class="h2 text-center mb-4">Üye Girişi</h2>
-                    @if (!ViewData.ModelState.IsValid)
-                    {
-                        <div class="alert alert-danger">
-                            @Html.ValidationSummary()
+        <div class="container container-normal py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-md-5">
+                    <div class="text-center mb-4">
+                        <a href="/" class="navbar-brand navbar-brand-autodark"><img src="/static/logo.png" height="36" alt=""></a>
+                    </div>
+                    <div class="card card-md">
+                        <div class="card-body">
+                            <h2 class="h2 text-center mb-4">Üye Girişi</h2>
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger">
+                                    @Html.ValidationSummary()
+                                </div>
+                            }
+                            <form method="post" autocomplete="off">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    @Html.TextBoxFor(n => n.Email, new { @class = "form-control", placeholder = "Email", type = "email", autocomplete = "off" })
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">
+                                        Şifre
+                                        <span class="form-label-description">
+                                            <a href="">Şifremi unuttum</a>
+                                        </span>
+                                    </label>
+                                    <div class="input-group input-group-flat">
+                                        @Html.TextBoxFor(n => n.Password, new { @class = "form-control", placeholder = "Password", type = "password", autocomplete = "off" })
+                                        <span class="input-group-text">
+                                            <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-check">
+                                        <input type="checkbox" class="form-check-input" />
+                                        <span class="form-check-label">Beni hatırla</span>
+                                    </label>
+                                </div>
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+                                </div>
+                            </form>
                         </div>
-                    }
-                    <form method="post" autocomplete="off">
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            @Html.TextBoxFor(n => n.Email, new { @class = "form-control", placeholder = "Email", type = "email", autocomplete = "off" })
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label">
-                                Şifre
-                                <span class="form-label-description">
-                                    <a href="">Şifremi unuttum</a>
-                                </span>
-                            </label>
-                            <div class="input-group input-group-flat">
-                                @Html.TextBoxFor(n => n.Password, new { @class = "form-control", placeholder = "Password", type = "password", autocomplete = "off" })
-                                <span class="input-group-text">
-                                    <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-check">
-                                <input type="checkbox" class="form-check-input" />
-                                <span class="form-check-label">Beni hatırla</span>
-                            </label>
-                        </div>
-                        <div class="form-footer">
-                            <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="text-center text-muted mt-3">
+                        Henüz Hesabın Yok Mu? <a href="/membership/signup" tabindex="-1">Kayıt Ol</a>
+                    </div>
                 </div>
-            </div>
-            <div class="text-center text-muted mt-3">
-                Henüz Hesabın Yok Mu? <a href="/membership/signup" tabindex="-1">Kayıt Ol</a>
+                <div class="col-md-7 d-none d-lg-block">
+                    <img src="/static/illustrations/login.webp" class="d-block mx-auto" />
+                </div>
             </div>
         </div>
     </div>

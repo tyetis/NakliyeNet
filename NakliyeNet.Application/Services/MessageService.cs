@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
-using TransportationApp.Domain.Common;
-using TransportationApp.Domain.Entity;
-using TransportationApp.Domain.Models.Message;
-using TransportationApp.Domain.Repository;
-using TransportationApp.Domain.Services;
+using NakliyeNet.Application.Models.Membership;
+using NakliyeNet.Domain.Common;
+using NakliyeNet.Domain.Entity;
+using NakliyeNet.Domain.Models.Message;
+using NakliyeNet.Domain.Repository;
+using NakliyeNet.Domain.Services;
 
-namespace TransportationApp.Application.Services
+namespace NakliyeNet.Application.Services
 {
     public class MessageService : BaseService, IMessageService
     {

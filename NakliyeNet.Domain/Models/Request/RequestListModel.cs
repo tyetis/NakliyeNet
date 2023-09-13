@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Common;
-using TransportationApp.Domain.Entity;
+using NakliyeNet.Domain.Common;
+using NakliyeNet.Domain.Entity;
 
-namespace TransportationApp.Domain.Models.Request
+namespace NakliyeNet.Domain.Models.Request
 {
     public class RequestListModel
     {

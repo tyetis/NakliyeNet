@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Common;
+using NakliyeNet.Domain.Common;
 
-namespace TransportationApp.Application.Models.Membership
+namespace NakliyeNet.Application.Models.Membership
 {
     public class LoggedUser
     {

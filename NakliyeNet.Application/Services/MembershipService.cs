@@ -7,10 +7,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
-using TransportationApp.Domain.Common;
+using NakliyeNet.Application.Models.Membership;
+using NakliyeNet.Domain.Common;
 
-namespace TransportationApp.Application.Services
+namespace NakliyeNet.Application.Services
 {
     public class MembershipService : IMembershipService
     {

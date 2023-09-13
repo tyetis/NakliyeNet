@@ -1,5 +1,5 @@
-﻿@using TransportationApp.Domain.Entity;
-@using TransportationApp.Domain.Common;
+﻿@using NakliyeNet.Domain.Entity;
+@using NakliyeNet.Domain.Common;
 @model Request
 @{
     ViewData["Title"] = $"#{Model.Id} {Model.Category.Name}";
@@ -41,6 +41,10 @@
                         </svg>
                         Mesaj Gönder
                     </a>
+                    @if (application.Status == (int)RequestApplicationStatus.Sent)
+                    {
+                        <button type="button" class="btn btn-danger" id="btnCancel" data-id="@application.Id">Geri Çek</button>
+                    }
                 }
             </div>
         </div>
@@ -158,6 +162,13 @@
                 location.reload()
             })
             return false
+        })
+        $("#btnCancel").click(function () {
+            if (confirm("Bu teklifi geri çekmek istediğinizden emin misiniz ?")) {
+                $.post("/company/application/cancel", { applicationId: $(this).data("id") }, function () {
+                    location.reload();
+                })
+            }
         })
     </script>
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Models.Message;
+using NakliyeNet.Domain.Models.Message;
 
-namespace TransportationApp.Domain.Services
+namespace NakliyeNet.Domain.Services
 {
     public interface IMessageService
     {

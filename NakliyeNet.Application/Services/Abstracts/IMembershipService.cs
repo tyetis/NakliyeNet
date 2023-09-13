@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
+using NakliyeNet.Application.Models.Membership;
 
-namespace TransportationApp.Application.Services
+namespace NakliyeNet.Application.Services
 {
     public interface IMembershipService
     {

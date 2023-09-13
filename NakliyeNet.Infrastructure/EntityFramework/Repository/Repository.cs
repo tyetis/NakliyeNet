@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Repository;
+using NakliyeNet.Domain.Repository;
 
-namespace TransportationApp.Infrastructure.EntityFramework.Repository
+namespace NakliyeNet.Infrastructure.EntityFramework.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

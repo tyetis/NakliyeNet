@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Services;
+using NakliyeNet.Domain.Services;
 
-namespace TransportationApp.Controllers
+namespace NakliyeNet.Controllers
 {
     [Authorize]
     public class ProfileController : Controller

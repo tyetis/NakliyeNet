@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Entity;
-using TransportationApp.Domain.Models.Common;
-using TransportationApp.Domain.Models.Membership;
+using NakliyeNet.Domain.Entity;
+using NakliyeNet.Domain.Models.Common;
+using NakliyeNet.Domain.Models.Membership;
 
-namespace TransportationApp.Domain.Services
+namespace NakliyeNet.Domain.Services
 {
     public interface IUserService
     {

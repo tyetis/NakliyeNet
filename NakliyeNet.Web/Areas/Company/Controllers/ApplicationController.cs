@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TransportationApp.Application.Models.Membership;
-using TransportationApp.Domain.Services;
+using NakliyeNet.Application.Models.Membership;
+using NakliyeNet.Domain.Services;
 
-namespace TransportationApp.Areas.Company.Controllers
+namespace NakliyeNet.Areas.Company.Controllers
 { 
     [Area("Company")]
     public class ApplicationController : Controller

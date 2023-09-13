@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace TransportationApp.Domain.Entity
+namespace NakliyeNet.Domain.Entity
 {
     public partial class CompanyTeam
     {

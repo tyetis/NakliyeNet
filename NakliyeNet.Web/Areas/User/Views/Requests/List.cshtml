@@ -1,6 +1,6 @@
-﻿@using TransportationApp.Domain.Models.Request;
-@using TransportationApp.Domain.Models.Common;
-@using TransportationApp.Domain.Common
+﻿@using NakliyeNet.Domain.Models.Request;
+@using NakliyeNet.Domain.Models.Common;
+@using NakliyeNet.Domain.Common
 @model PaginationResult<RequestListModel>
 @{
     ViewData["Title"] = "Taleplerim";
@@ -10,7 +10,7 @@
         <div class="row g-2 align-items-center">
             <div class="col">
                 <h2 class="page-title">
-                    Taleplerim
+                    Nakliye Taleplerim
                 </h2>
             </div>
             <div class="col-auto ms-auto d-print-none">
@@ -30,11 +30,11 @@
                     <table class="table table-hover" style="vertical-align:middle">
                         <thead>
                             <tr>
-                                <th><button class="table-sort" data-sort="sort-name">Id</button></th>
-                                <th><button class="table-sort desc" data-sort="sort-type">Kategori</button></th>
-                                <th><button class="table-sort desc" data-sort="sort-type">Teklif Sayısı</button></th>
-                                <th><button class="table-sort" data-sort="sort-score">Oluşturulma Tarihi</button></th>
-                                <th><button class="table-sort desc" data-sort="sort-type">Durum</button></th>
+                                <th>Talep No</th>
+                                <th>Kategori</th>
+                                <th>Teklif Sayısı</th>
+                                <th>Oluşturulma Tarihi</th>
+                                <th>Durum</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -43,7 +43,7 @@
                             {
                                 <tr>
                                     <td class="sort-name">#@t.Id</td>
-                                    <td class="sort-type"><a href="/user/requests/detail/@t.Id">@t.Category</a></td>
+                                    <td class="sort-type"><a href="/user/requests/detail/@t.Id">@t.Category #@t.Id</a></td>
                                     <td class="sort-type">
                                         @if (t.ApplicationCount == 0)
                                         {
@@ -128,7 +128,7 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Puan girin</label>
+                    <label class="form-label">Puan verin</label>
                     <select name="rating" class="form-select">
                         <option>1</option>
                         <option>2</option>
@@ -139,7 +139,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Yorum yazın</label>
-                    <textarea name="comment" rows="5" class="form-control"></textarea>
+                    <textarea name="comment" rows="5" class="form-control" placeholder="Yorum yazın..."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -163,9 +163,11 @@
             $(".modal #Id").val($(this).data("id"))
         })
         $("#formComplete").submit(function () {
-            $.post("/user/requests/complete", $(this).serialize(), function () {
-                location.reload()
-            })
+            if (confirm("Bu talebi tamamlamak istediğinizden emin misiniz ?")) {
+                $.post("/user/requests/complete", $(this).serialize(), function () {
+                    location.reload()
+                })
+            }
             return false
         })
     </script>

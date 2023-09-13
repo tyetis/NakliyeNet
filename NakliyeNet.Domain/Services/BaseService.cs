@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportationApp.Domain.Repository;
+using NakliyeNet.Domain.Repository;
 
-namespace TransportationApp.Domain.Services
+namespace NakliyeNet.Domain.Services
 {
     public abstract class BaseService : IDisposable
     {
