@@ -66,6 +66,7 @@ namespace NakliyeNet.Application.Services
                 CategoryId = model.CategoryId,
                 Description = model.Description,
                 Status = (int)RequestStatus.Active,
+                EstimatedDistance = model.EstimatedDistance,
                 CreateDate = DateTime.Now
             };
             var properties = model.GetType().GetProperties().ToList();
@@ -108,6 +109,47 @@ namespace NakliyeNet.Application.Services
             request.Status = (int)RequestStatus.Completed;
             UnitOfWork.SaveChanges();
             return true;
+        }
+
+        public string CalculateAmount(CreateRequestModel model)
+        {
+            decimal baseAmount = 4000;
+            if (model.CategoryId == 1) baseAmount += 1000;
+            else if (model.CategoryId == 2) baseAmount += 15500;
+            else if (model.CategoryId == 3) baseAmount += 2500;
+            else if (model.CategoryId == 4) baseAmount += 500;
+            else if (model.CategoryId == 5) baseAmount += 2000;
+            else if (model.CategoryId == 6) baseAmount += 500;
+            else if (model.CategoryId == 1) baseAmount += 1000;
+
+            if (model.RoomType == "1+1") baseAmount += 1000;
+            else if (model.RoomType == "1+1") baseAmount += 1500;
+            else if (model.RoomType == "2+1") baseAmount += 2000;
+            else if (model.RoomType == "3+1") baseAmount += 3500;
+            else if (model.RoomType == "4+1") baseAmount += 4000;
+            else if (model.RoomType == "5+1") baseAmount += 5500;
+            else if (model.RoomType == "Daha Büyük") baseAmount += 7000;
+
+            if (model.OldFloorType == "Merdiven Kullanılmalı") baseAmount += 2000;
+            else if (model.OldFloorType == "Modüler Asansör Kullanılmalı") baseAmount += 3500;
+
+            if (model.NewFloorType == "Merdiven Kullanılmalı") baseAmount += 2000;
+            else if (model.NewFloorType == "Modüler Asansör Kullanılmalı") baseAmount += 3500;
+
+            if (model.PackagingType == "Evet, paketlemeyi nakliyeci yapsın") baseAmount += 1500;
+
+            if (model.InsuranceType == "Hayır, istemiyorum") baseAmount += 1000;
+
+            if (model.LoadType == "Paletli Yük Taşıma") baseAmount += 3000;
+            else if (model.LoadType == "Konteyner Taşıma") baseAmount += 10000;
+            else if (model.LoadType == "Ticari Yük Taşıma") baseAmount += 4500;
+
+            if (model.LoadWeight == "500 kg") baseAmount += 1500;
+            else if (model.LoadWeight == "5-10 Ton") baseAmount += 3000;
+            else if (model.LoadWeight == "5-10 Ton") baseAmount += 3000;
+            else if (model.LoadWeight == "10 Ton veya daha fazla") baseAmount += 3500;
+
+            return baseAmount.ToString("C0");
         }
     }
 }

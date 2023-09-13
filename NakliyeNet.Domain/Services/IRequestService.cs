@@ -16,5 +16,6 @@ namespace NakliyeNet.Domain.Services
         bool Create(CreateRequestModel model);
         bool Cancel(int id);
         bool Complete(int id, int rating, string comment);
+        string CalculateAmount(CreateRequestModel model);
     }
 }

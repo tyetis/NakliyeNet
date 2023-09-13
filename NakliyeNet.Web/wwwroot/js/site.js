@@ -9,6 +9,42 @@
     }
 }
 
+function getDistanceBetweenAddress(fromAddress, toAdress, fnDistance) {
+    // İki adresi ve aracınızın özelliklerini tanımlayın
+    var baslangicAdresi = fromAddress;
+    var varisAdresi = toAdress;
+    var aracTipi = "car"; // Araba için kullanıyoruz, diğer seçenekler için belirli bir sürüş modu belirtin
+
+    // OpenStreetMap yönlendirme hizmetini kullanarak yol tarifleri alın
+    var directionsService = new L.Routing.osrmv1({
+        serviceUrl: "https://router.project-osrm.org/route/v1",
+        profile: aracTipi, // Araba kullanılacaksa "car", diğer seçenekler için belirli bir sürüş modu belirtin
+    });
+
+    var url = `https://nominatim.openstreetmap.org/search?format=json&q=${baslangicAdresi}`;
+    fetch(url).then(response => response.json()).then(data => {
+        var url2 = `https://nominatim.openstreetmap.org/search?format=json&q=${varisAdresi}`;
+        fetch(url2).then(response => response.json()).then(data2 => {
+            var waypoints = [{
+                latLng: { lat: data[0].lat, lng: data[0].lon }
+            }, {
+                latLng: { lat: data2[0].lat, lng: data2[0].lon }
+            }];
+
+            directionsService.route(waypoints, function (err, route) {
+                if (!err) {
+                    var distance = route[0].summary.totalDistance / 1000; // Mesafe kilometre cinsinden
+                    fnDistance(distance)
+                } else {
+                    console.log("Yol tarifi alınamadı: " + err.message);
+                    fnDistance(0)
+                }
+            });
+        })
+    })
+
+}
+
 $(function () {
     var current = location.pathname;
     $('.nav-item .nav-link').each(function () {

@@ -65,5 +65,11 @@ namespace NakliyeNet.Areas.User.Controllers
             var result = RequestService.Complete(id, rating, comment);
             return Json(result);
         }
+
+        [HttpPost]
+        public IActionResult CalculateAmount(CreateRequestModel model)
+        {
+            return Json(RequestService.CalculateAmount(model));
+        }
     }
 }

@@ -54,6 +54,10 @@
                             }
                         </div>
                     </div>
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">Tahmini Mesafe</div>
+                        <div class="datagrid-content">@Model.EstimatedDistance.ToString("N0") Km</div>
+                    </div>
                     @foreach (var p in Model.RequestDetails)
                     {
                         <div class="datagrid-item">

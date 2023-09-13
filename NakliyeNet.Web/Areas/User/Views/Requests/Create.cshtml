@@ -3,9 +3,15 @@
 @{
     ViewData["Title"] = "Create Transportation Request";
 }
-<div class="page-body">
+<div class="page-body mt-0">
+    <div class="list-group bg-white mb-3 sticky-md-top">
+        <div class="list-group-item text-center">
+            <h3 class="d-inline">Tahmini Maliyet:</h3> &nbsp; <h1 id="estimatedAmount" class="d-inline text-green">@(0.ToString("C0"))</h1> &nbsp;
+            <h3 class="d-inline">Tahmini Mesafe:</h3> &nbsp; <h1 id="estimatedDistance" class="d-inline text-green">0 Km</h1>
+        </div>
+    </div>
     <div class="container-xl">
-        <form method="post" class="card card-md" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+        <form id="frmRequest" method="post" class="card card-md" style="max-width: 600px; margin-left: auto; margin-right: auto;">
             <div class="card-body text-center py-4 p-sm-4">
                 <h1>Yeni Talep Oluştur</h1>
                 <p class="text-muted">İhtiyacını tam olarak yansıtacak bir talep oluşturman için talep sihirbazı sana yardımcı olacak</p>
@@ -17,12 +23,14 @@
                     <select id="category" class="form-select" name="CategoryId" required>
                         <option value="">Seçin</option>
                         <option value="1">Evden Eve Nakliyat</option>
+                        <option value="2">Şehirler Arası Nakliyat</option>
                         <option value="3">Ofis Taşıma</option>
                         <option value="4">Eşya Taşıma</option>
                         <option value="5">Yük Taşıma</option>
                     </select>
                 </div>
                 <div id="requestProperties"></div>
+                <input type="hidden" name="EstimatedDistance"/>
             </div>
             <div class="card-footer">
                 <div class="row align-items-center mt-3">
@@ -42,8 +50,11 @@
     </div>
 </div>
 @section Scripts {
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
     <script>
         $("#category").change(function () {
+            $("#frmRequest input,#frmRequest select").not(this).val("")
             $.post("/user/requests/createProperties", { categoryId: $(this).val() }, function (response) {
                 $("#requestProperties").html(response)
                 loadCities()
@@ -58,6 +69,19 @@
                 }
             })
         })
+        $("body").on("change", "[name=FromCity],[name=FromDistrict],[name=ToCity],[name=ToDistrict]", function () {
+            var fromAddress = $("[name=FromCity]").val() + ", " + $("[name=FromDistrict]").val()
+            var toAddress = $("[name=ToCity]").val() + ", " + $("[name=ToDistrict]").val()
+            if (fromAddress.indexOf("Seçiniz") > 0 || toAddress.indexOf("Seçiniz") > 0) return
+            getDistanceBetweenAddress(fromAddress, toAddress, function (distance) {
+                $("#estimatedDistance").text(parseInt(distance).toLocaleString() + " Km")
+                $("[name=EstimatedDistance]").val(parseInt(distance))
+            })
+        })
+        $("body").on("change", "#frmRequest input,select", function () {
+            calculateAmount()
+        })
+
         function loadCities() {
             $.post("/home/getCities", function (cities) {
                 $(".selCity").each(function () {
@@ -66,6 +90,11 @@
                         $(this).append("<option>" + c + "</option>")
                     }
                 })
+            })
+        }
+        function calculateAmount() {
+            $.post("/user/requests/calculateAmount", $("#frmRequest").serialize(), function (response) {
+                $("#estimatedAmount").text(response)
             })
         }
     </script>

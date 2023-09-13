@@ -11,8 +11,8 @@ namespace NakliyeNet.Domain.Common
         public static Dictionary<string, string> RequestPropertiesDict = new Dictionary<string, string>
         {
             { "RoomType", "Kaç odalı ev eşyası taşınacak?" },
-            { "OldHomeType", "Eski Evden Eşya Nasıl Taşınacak?" },
-    { "NewHomeType", "Yeni Evden Eşya Nasıl Taşınacak?" },
+            { "OldFloorType", "Eski Evden Eşya Nasıl Taşınacak?" },
+    { "NewFloorType", "Yeni Evden Eşya Nasıl Taşınacak?" },
     { "PackagingType", "Paketleme için yardım gerekiyor mu?" },
     { "InsuranceType", "EMTİA sigortası ister misin?" },
     { "Description", "Nakliyeci başka neyi bilmeli / neye dikkat etmeli?" },

@@ -10,8 +10,8 @@ namespace NakliyeNet.Domain.Models.Request
     {
         public int CategoryId { get; set; }
         public string RoomType { get; set; }
-        public string OldHomeType { get; set; }
-        public string NewHomeType { get; set; }
+        public string OldFloorType { get; set; }
+        public string NewFloorType { get; set; }
         public string PackagingType { get; set; }
         public string InsuranceType { get; set; }
         public string Description { get; set; }
@@ -23,5 +23,6 @@ namespace NakliyeNet.Domain.Models.Request
         public string LoadType { get; set; }
         public string LoadWeight { get; set; }
         public string ItemType { get; set; }
+        public decimal EstimatedDistance { get; set; }
     }
 }

@@ -111,6 +111,10 @@
                         <div class="datagrid-title">Teklif Sayısı</div>
                         <div class="datagrid-content">@Model.RequestApplications.Count</div>
                     </div>
+                    <div class="datagrid-item">
+                        <div class="datagrid-title">Teklif Sayısı</div>
+                        <div class="datagrid-content">@Model.EstimatedDistance.ToString("N0") Km</div>
+                    </div>
                     @foreach (var p in Model.RequestDetails)
                     {
                         <div class="datagrid-item">

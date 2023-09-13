@@ -19,6 +19,7 @@ namespace NakliyeNet.Domain.Entity
         public int UserId { get; set; }
         public string Description { get; set; }
         public int Status { get; set; }
+        public decimal EstimatedDistance { get; set; }
         public DateTime CreateDate { get; set; }
 
         public virtual JobCategory Category { get; set; }
