@@ -36,6 +36,7 @@ namespace NakliyeNet.Application.Services
                 Id = n.Id,
                 Title = n.Title,
                 Category = n.Category.Name,
+                UserName = $"{n.User.Name} {n.User.Surname}",
                 UserImageUrl = n.User.ImageUrl,
                 ApplicationCount = n.RequestApplications.Count,
                 ApplicationAmount = n.RequestApplications.Where(a => a.CompanyId == LoggedUser.Id).Select(n => n.Amount).FirstOrDefault(),

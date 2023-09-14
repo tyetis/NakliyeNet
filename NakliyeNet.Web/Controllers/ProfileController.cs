@@ -23,5 +23,11 @@ namespace NakliyeNet.Controllers
             var company = CompanyService.GetCompany(id);
             return View(company);
         }
+
+        public IActionResult Companies()
+        {
+            var company = CompanyService.GetCompanies();
+            return View(company);
+        }
     }
 }

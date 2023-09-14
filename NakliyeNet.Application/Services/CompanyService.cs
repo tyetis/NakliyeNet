@@ -30,7 +30,7 @@ namespace NakliyeNet.Application.Services
 
         public PaginationResult<Company> GetCompanies()
         {
-            var query = RepoCompany.GetAll();
+            var query = RepoCompany.GetAll().Include(n => n.CompanyComments);
             return new PaginationResult<Company>
             {
                 Data = query.ToList(),

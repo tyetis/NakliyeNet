@@ -74,7 +74,7 @@
             var toAddress = $("[name=ToCity]").val() + ", " + $("[name=ToDistrict]").val()
             if (fromAddress.indexOf("Seçiniz") > 0 || toAddress.indexOf("Seçiniz") > 0) return
             getDistanceBetweenAddress(fromAddress, toAddress, function (distance) {
-                $("#estimatedDistance").text(parseInt(distance).toLocaleString() + " Km")
+                $("#estimatedDistance").text(parseInt(distance).toLocaleString("tr-TR") + " Km")
                 $("[name=EstimatedDistance]").val(parseInt(distance))
             })
         })

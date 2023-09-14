@@ -75,6 +75,14 @@
                                             </svg>
                                             @r.CreateDate.DateTimeFormat() Önce Gönderildi
                                         </div>
+                                        <div class="list-inline-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                            </svg>
+                                            @r.UserName
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-auto">
@@ -83,10 +91,13 @@
                                         {
                                             <a href="#" class="badge badge-outline text-muted border fw-normal badge-pill">Sigortalı</a>
                                         }
-                                        <a href="#" class="badge badge-notification border fw-bolder badge-pill bg-green">Yeni</a>
                                         @if (r.ApplicationAmount > 0)
                                         {
                                             <a href="#" class="badge badge-notification border fw-bolder badge-pill bg-green">Teklif Verildi</a>
+                                        }
+                                        else if (DateTime.Now - r.CreateDate < TimeSpan.FromDays(3))
+                                        {
+                                            <a href="#" class="badge badge-notification border fw-bolder badge-pill bg-green">Yeni</a>
                                         }
                                     </div>
                                 </div>

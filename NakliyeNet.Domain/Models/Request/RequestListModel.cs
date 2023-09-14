@@ -13,6 +13,7 @@ namespace NakliyeNet.Domain.Models.Request
         public int Id { get; set; }
         public string Title { get; set; }
         public string Category { get; set; }
+        public string UserName { get; set; }
         public string UserImageUrl { get; set; }
         public int ApplicationCount { get; set; }
         public decimal ApplicationAmount { get; set; }
