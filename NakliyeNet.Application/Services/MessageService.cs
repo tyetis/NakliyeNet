@@ -33,6 +33,7 @@ namespace NakliyeNet.Application.Services
             {
                 RecipientId = userId,
                 RecipientName = RepoUser.GetAll(n => n.Id == userId).Select(n => $"{n.Name} {n.Surname}").FirstOrDefault(),
+                People = GetCompanyPeople(LoggedUser.Id),
                 Messages = (from m in RepoMessage.GetAll()
                             where (m.FromType == (int)MemberType.Company && m.From == LoggedUser.Id && m.To == userId ||
                                    m.FromType == (int)MemberType.User && m.From == userId && m.To == LoggedUser.Id)
@@ -52,8 +53,9 @@ namespace NakliyeNet.Application.Services
             return new MessagesModel
             {
                 RecipientId = companyId,
-                RecipientName = company.Name,
-                RecipientImageUrl = company.LogoUrl,
+                RecipientName = company?.Name,
+                RecipientImageUrl = company?.LogoUrl,
+                People = GetUserPeople(LoggedUser.Id),
                 Messages = (from m in RepoMessage.GetAll()
                             where (m.FromType == (int)MemberType.Company && m.From == companyId && m.To == LoggedUser.Id ||
                                    m.FromType == (int)MemberType.User && m.From == LoggedUser.Id && m.To == companyId)
@@ -91,6 +93,46 @@ namespace NakliyeNet.Application.Services
                 SentDate = DateTime.Now
             });
             UnitOfWork.SaveChanges();
+        }
+
+        public List<MessagesModel> GetCompanyPeople(int companyId)
+        {
+            return (from n in RepoMessage.GetAll()
+                    from u in RepoUser.GetAll().Where(c => n.FromType == (int)MemberType.User && n.To == companyId && n.From == c.Id || n.FromType == (int)MemberType.Company && n.From == companyId && n.To == c.Id)
+                    where (n.From == companyId && n.FromType == (int)MemberType.Company) || (n.To == companyId && n.FromType == (int)MemberType.User)
+                    select new { n, u }).AsEnumerable().GroupBy(n => n.u.Id).Select(n => new MessagesModel
+                    {
+                        RecipientId = n.Key,
+                        RecipientName = $"{n.FirstOrDefault().u.Name} {n.FirstOrDefault().u.Surname}",
+                        RecipientImageUrl = n.FirstOrDefault().u.ImageUrl,
+                        Messages = new List<MessageModel>
+                        {
+                            new MessageModel
+                            {
+                                Message = n.LastOrDefault().n.Text
+                            }
+                        }
+                    }).ToList();
+        }
+
+        public List<MessagesModel> GetUserPeople(int userId)
+        {
+            return (from n in RepoMessage.GetAll()
+                    from c in RepoCompany.GetAll().Where(c => n.FromType == (int)MemberType.Company && n.To == userId && n.From == c.Id || n.FromType == (int)MemberType.User && n.From == userId && n.To == c.Id)
+                    where (n.From == userId && n.FromType == (int)MemberType.User) || (n.To == userId && n.FromType == (int)MemberType.Company)
+                    select new { n,c }).AsEnumerable().GroupBy(n => n.c.Id).Select(n => new MessagesModel
+                    {
+                        RecipientId = n.Key,
+                        RecipientName = n.FirstOrDefault().c.Name,
+                        RecipientImageUrl = n.FirstOrDefault().c.LogoUrl,
+                        Messages = new List<MessageModel>
+                        {
+                            new MessageModel
+                            {
+                                Message = n.LastOrDefault().n.Text
+                            }
+                        }
+                    }).ToList();
         }
     }
 }

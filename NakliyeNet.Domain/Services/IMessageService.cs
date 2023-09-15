@@ -11,6 +11,8 @@ namespace NakliyeNet.Domain.Services
     {
         MessagesModel GetCompanyMessages(int userId);
         MessagesModel GetUserMessages(int companyId);
+        List<MessagesModel> GetCompanyPeople(int companyId);
+        List<MessagesModel> GetUserPeople(int userId);
         void SendToCompany(int companyId, string text);
         void SendToUser(int userId, string text);
     }

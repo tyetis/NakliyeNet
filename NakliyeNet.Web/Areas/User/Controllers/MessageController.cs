@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NakliyeNet.Domain.Services;
+using NakliyeNet.Domain.Models.Message;
 
 namespace NakliyeNet.Areas.User.Controllers
 {

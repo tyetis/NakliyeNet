@@ -12,5 +12,6 @@ namespace NakliyeNet.Domain.Models.Message
         public string RecipientName { get; set; }
         public string RecipientImageUrl { get; set; }
         public List<MessageModel> Messages { get; set; }
+        public List<MessagesModel> People { get; set; }
     }
 }

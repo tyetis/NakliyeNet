@@ -9,20 +9,49 @@
             <div class="col">
                 <div class="container py-5">
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-10 col-lg-8 col-xl-6">
-                            <div class="card" id="chat2">
-                                <div class="card-header d-flex justify-content-between p-3">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <span class="avatar rounded" style="background-image:url(@Model.RecipientImageUrl)"></span>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Kişiler</h3>
+                                </div>
+                                <div class="list-group list-group-flush list-group-hoverable overflow-auto" style="max-height:73vh">
+                                    @foreach (var p in Model.People)
+                                    {
+                                        <div class="list-group-item @(p.RecipientId.ToString() == ViewContext.RouteData.Values["id"].ToString() ? "active" : "")">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto"><span class="badge bg-green"></span></div>
+                                                <div class="col-auto">
+                                                    <a href="/user/message/list/@p.RecipientId">
+                                                        <span class="avatar" style="background-image: url(@p.RecipientImageUrl)"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col text-truncate">
+                                                    <a href="/user/message/list/@p.RecipientId" class="text-reset d-block">@p.RecipientName</a>
+                                                    <div class="d-block text-muted text-truncate mt-n1">@p.Messages.LastOrDefault().Message</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <h2 class="fw-bold mb-0"><a href="/profile/company/@Model.RecipientId">@Model.RecipientName</a></h2>
-                                            <p class="m-0">Şirket</p>
-                                            @Html.HiddenFor(n => n.RecipientId)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xl-6">
+                            <div class="card" id="chat2">
+                                @if (Model.RecipientId > 0)
+                                {
+                                    <div class="card-header d-flex justify-content-between p-3">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <span class="avatar rounded" style="background-image:url(@Model.RecipientImageUrl)"></span>
+                                            </div>
+                                            <div class="col">
+                                                <h2 class="fw-bold mb-0"><a href="/profile/company/@Model.RecipientId">@Model.RecipientName</a></h2>
+                                                <p class="m-0">Şirket</p>
+                                                @Html.HiddenFor(n => n.RecipientId)
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                                 <div class="card-body messageList" data-mdb-perfect-scrollbar="true" style="position: relative; overflow:auto; height: 400px">
                                     @foreach (var m in Model.Messages)
                                     {
@@ -69,23 +98,26 @@
                                         </div>
                                     }
                                 </div>
-                                <form id="frmMessage" src="/user/message/send" class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-                                    <span class="avatar rounded-circle">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
-                                    </span>
-                                    <input type="text" class="form-control form-control-lg" id="txtMessage" placeholder="Mesajınızı girin..." autocomplete="off">
-                                    <button type="submit" class="btn btn-outline-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M10 14l11 -11"></path>
-                                            <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
-                                        </svg>
-                                    </button>
-                                </form>
+                                @if (Model.RecipientId > 0)
+                                {
+                                    <form id="frmMessage" src="/user/message/send" class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                                        <span class="avatar rounded-circle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                            </svg>
+                                        </span>
+                                        <input type="text" class="form-control form-control-lg" id="txtMessage" placeholder="Mesajınızı girin..." autocomplete="off">
+                                        <button type="submit" class="btn btn-outline-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M10 14l11 -11"></path>
+                                                <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                }
                             </div>
                         </div>
                     </div>
