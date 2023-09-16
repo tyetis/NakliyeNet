@@ -10,5 +10,6 @@ namespace NakliyeNet.Domain.Services
     {
         List<string> GetCities();
         List<string> GetDistrict(string city);
+        Task<string> GetDistance(string q);
     }
 }

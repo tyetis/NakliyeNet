@@ -10,6 +10,7 @@
 }
 
 function getDistanceBetweenAddress(fromAddress, toAdress, fnDistance) {
+    var baseurl = window.location.origin + "/home/openStreetMapSearch";
     // İki adresi ve aracınızın özelliklerini tanımlayın
     var baslangicAdresi = fromAddress;
     var varisAdresi = toAdress;
@@ -21,9 +22,9 @@ function getDistanceBetweenAddress(fromAddress, toAdress, fnDistance) {
         profile: aracTipi, // Araba kullanılacaksa "car", diğer seçenekler için belirli bir sürüş modu belirtin
     });
 
-    var url = `https://nominatim.openstreetmap.org/search?format=json&q=${baslangicAdresi}`;
+    var url = `${baseurl}?q=${baslangicAdresi}`;
     fetch(url).then(response => response.json()).then(data => {
-        var url2 = `https://nominatim.openstreetmap.org/search?format=json&q=${varisAdresi}`;
+        var url2 = `${baseurl}?q=${varisAdresi}`;
         fetch(url2).then(response => response.json()).then(data2 => {
             var waypoints = [{
                 latLng: { lat: data[0].lat, lng: data[0].lon }
