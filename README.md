@@ -23,7 +23,7 @@ NakliyeNet projesi TechCareer tarafından düzenlenen TransPortathon Hackathon y
 
 **Back-End:** .Net Core MVC <br/>
 **Front-End:** Javascript, JQuery, CSS, SCSS <br/>
-**Database:** Microsot Sql Server (LocalDB) <br/>
+**Database:** Microsoft Sql Server (LocalDB) <br/>
 
 ## Demo Kullanıcı Bilgileri
 
