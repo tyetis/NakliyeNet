@@ -27,7 +27,7 @@ NakliyeNet projesi TechCareer tarafından düzenlenen TransPortathon Hackathon y
 
 ## Demo Kullanıcı Bilgileri
 
-**Üye hesabı:** <br/>
+**Üye Hesabı:** <br/>
 Email: ali.yilmaz@email.com <br/>
 Şifre: 12345
 
