@@ -50,10 +50,10 @@ namespace NakliyeNet.Controllers
             return Json(LocationService.GetDistrict(city));
         }
 
-        public async Task<IActionResult> OpenStreetMapSearch(string q)
+        public async Task<string> OpenStreetMapSearch(string q)
         {
             var result = await LocationService.GetDistance(q);
-            return Json(result);
+            return result;
         }
     }
 }
