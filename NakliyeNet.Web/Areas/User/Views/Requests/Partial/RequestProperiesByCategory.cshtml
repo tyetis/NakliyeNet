@@ -98,48 +98,52 @@
         </select>
     </div>
 }
-<div class="mb-3">
-    <label class="form-label">Nakliyeci başka neyi bilmeli / neye dikkat etmeli?</label>
-    <textarea name="Description" rows="5" class="form-control" required></textarea>
-</div>
-<div class="mb-3">
-    <label class="form-label">Eşya/Yük Nereden Taşınacak?</label>
-    <div class="row">
-        <div class="col-6">
-            <select name="FromCity" class="form-select selCity" data-fill="FromDistrict" required>
-                <option value="">Şehir Seçin</option>
-            </select>
-        </div>
-        <div class="col-6">
-            <select name="FromDistrict" class="form-select" required>
-                <option value="">İlçe Seçin</option>
-            </select>
+@if (Model > 0)
+{
+    <div class="mb-3">
+        <label class="form-label">Nakliyeci başka neyi bilmeli / neye dikkat etmeli?</label>
+        <textarea name="Description" rows="5" class="form-control" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Eşya/Yük Nereden Taşınacak?</label>
+        <div class="row">
+            <div class="col-6">
+                <select name="FromCity" class="form-select selCity" data-fill="FromDistrict" required>
+                    <option value="">Şehir Seçin</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <select name="FromDistrict" class="form-select" required>
+                    <option value="">İlçe Seçin</option>
+                </select>
+            </div>
         </div>
     </div>
-</div>
-<div class="mb-3">
-    <label class="form-label">Eşya/Yük Nereye Taşınacak?</label>
-    <div class="row">
-        <div class="col-6">
-            <select name="ToCity" class="form-select selCity" data-fill="ToDistrict" required>
-                <option value="">Şehir Seçin</option>
-ü            </select>
-        </div>
-        <div class="col-6">
-            <select name="ToDistrict" class="form-select" required>
-                <option value="">İlçe Seçin</option>
-            </select>
+    <div class="mb-3">
+        <label class="form-label">Eşya/Yük Nereye Taşınacak?</label>
+        <div class="row">
+            <div class="col-6">
+                <select name="ToCity" class="form-select selCity" data-fill="ToDistrict" required>
+                    <option value="">Şehir Seçin</option>
+                    ü
+                </select>
+            </div>
+            <div class="col-6">
+                <select name="ToDistrict" class="form-select" required>
+                    <option value="">İlçe Seçin</option>
+                </select>
+            </div>
         </div>
     </div>
-</div>
-<div class="mb-3">
-    <label class="form-label">Eşya/Yük Ne zaman Taşınacak?</label>
-    <select name="TransportationTime" class="form-select" required>
-        <option value="">Seçin</option>
-        <option>En kısa zamanda</option>
-        <option>Bir Hafta İçinde</option>
-        <option>Bir Ay İçinde</option>
-        <option>Üç Ay İçinde</option>
-        <option>Sadece Fiyat Bakıyorum</option>
-    </select>
-</div>
+    <div class="mb-3">
+        <label class="form-label">Eşya/Yük Ne zaman Taşınacak?</label>
+        <select name="TransportationTime" class="form-select" required>
+            <option value="">Seçin</option>
+            <option>En kısa zamanda</option>
+            <option>Bir Hafta İçinde</option>
+            <option>Bir Ay İçinde</option>
+            <option>Üç Ay İçinde</option>
+            <option>Sadece Fiyat Bakıyorum</option>
+        </select>
+    </div>
+}

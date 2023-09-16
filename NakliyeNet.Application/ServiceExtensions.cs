@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NakliyeNet.Application.Models.Membership;
-using NakliyeNet.Application.Services;
 
 namespace NakliyeNet.Application
 {

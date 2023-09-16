@@ -47,7 +47,7 @@ namespace NakliyeNet.Application.Services
             });
             return new PaginationResult<RequestListModel>
             {
-                Data = query.ApplyPagination(10, 0).ToList(),
+                Data = query.OrderByDescending(n => n.CreateDate).ApplyPagination(10, 0).ToList(),
                 Total = query.Count()
             };
         }
