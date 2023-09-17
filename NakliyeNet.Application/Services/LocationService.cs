@@ -35,6 +35,7 @@ namespace NakliyeNet.Application.Services
         {
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Referrer = new Uri("http://www.nakliye.net");
                 var response = await client.GetAsync($"https://nominatim.openstreetmap.org/search?format=json&q={q}");
                 var json = await response.Content.ReadAsStringAsync();
                 return json;
